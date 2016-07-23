@@ -12,12 +12,22 @@ abstract class BaseDao{
     protected $dsn_write = '';
     protected $table_key = '';
     protected $fields = '';
+    public static $objBaseDao = null;
 
 
     public function __call($name, $args){
         $objCallName = new $name($args);
         $objCallName->setCallObj($this, $args);
         return $objCallName;
+    }
+
+    public static function instance($objClass = ''){
+        if(empty($objClass)) return this;
+        if(isset(self::$objBaseDao[$objClass]) && is_object(self::$objBaseDao[$objClass])) {
+            return self::$objBaseService[$objClass];
+        }
+        self::$objBaseDao[$objClass] = new $objClass();
+        return self::$objBaseDao[$objClass];
     }
 
     public function getList($conditions, $fields = NULL) {
