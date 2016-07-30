@@ -22,7 +22,7 @@ abstract class BaseDao{
     }
 
     public static function instance($objClass = ''){
-        if(empty($objClass)) return this;
+        if(empty($objClass)) throw new Exception('objClass is null');
         if(isset(self::$objBaseDao[$objClass]) && is_object(self::$objBaseDao[$objClass])) {
             return self::$objBaseService[$objClass];
         }

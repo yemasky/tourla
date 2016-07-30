@@ -8,6 +8,13 @@
 namespace merchant;
 class LoginService extends \BaseService {
     private static $loginKey = 'loginuser';
+
+    public function loginUser($arrayLoginInfo){
+        //$objMerchantUserDao = new MerchantUserDao();
+        //return $objMerchantUserDao->getLoginUser($arrayLoginInfo);
+        return MerchantUserDao::instance('\merchant\MerchantUserDao')->getLoginUser($arrayLoginInfo);
+    }
+    
     public static function getLoginUser($objCookie = NULL, $isSession = false) {
         if(!is_object($objCookie) && $isSession == false){
             $objCookie = new \Cookie;

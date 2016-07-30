@@ -10,9 +10,5 @@ namespace merchant;
 
 class MerchantUserService extends \BaseService{
 
-	public function getLoginUser($arrayLoginInfo){
-		//$objMerchantUserDao = new MerchantUserDao();
-		//return $objMerchantUserDao->getLoginUser($arrayLoginInfo);
-		return MerchantUserDao::instance()->getLoginUser($arrayLoginInfo);
-	}
+	
 }
