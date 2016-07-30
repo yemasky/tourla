@@ -6,8 +6,8 @@ define('__CLOSE_WEB', false);
 //web  
 define('__WEB_KEY','localhost');
 define('__KEY','xyzABcdeee12345');
-define('__WEB','http://localhost/tourla/trunk/root/merchant/');
-define('__RESOURCE','http://localhost/tourla/trunk/root/merchant/resource/');
+define('__WEB','http://dev.tourla.cn/');
+define('__RESOURCE','http://dev.tourla.cn/resource/');
 define('__BBS','http://localhost/izhizu/www/bbs/');
 define('__PIC','http://localhost/izhizu/www/');
 

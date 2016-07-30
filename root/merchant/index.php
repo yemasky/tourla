@@ -11,12 +11,7 @@ try {
 	$action = NULL;
 	if(isset($_REQUEST['action']))
 		$action = $_REQUEST['action'];
-} catch(Exception $e) {
-	echo ('error: ' . $e->getMessage() . "<br>");
-	echo (str_replace("\n","\n<br>",$e->getTraceAsString()));
-}
 
-try {
 	$objAction = new $model();
 	$objAction->execute($action);//
 } catch(Exception $e) {

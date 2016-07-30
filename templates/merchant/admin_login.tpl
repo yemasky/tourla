@@ -2,23 +2,33 @@
 <html lang="en">
     
 <head>
-        <title>Maruti Admin</title><meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-        <link rel="stylesheet" href="css/maruti-login.css" />
-    </head>
+    <%include file="merchant/inc/head.tpl"%>
+    <link rel="stylesheet" href="<%$__RESOURCE%>css/maruti-login.css" />
+    <link href="<%$__RESOURCE%>css/uniform.css" rel="stylesheet">
+    <link href="<%$__RESOURCE%>css/select2.css" rel="stylesheet">
+    <link href="<%$__RESOURCE%>css/maruti-style.css" rel="stylesheet">
+    <link href="<%$__RESOURCE%>css/maruti-media.css" rel="stylesheet" class="skin-color">
+    <script src="<%$__RESOURCE%>js/jquery.min.js"></script>
+    <script src="<%$__RESOURCE%>js/maruti.login.js"></script>
+    <script src="<%$__RESOURCE%>js/jquery.ui.custom.js"></script>
+    <script src="<%$__RESOURCE%>js/bootstrap.min.js"></script>
+    <script src="<%$__RESOURCE%>js/jquery.uniform.js"></script>
+    <script src="<%$__RESOURCE%>js/select2.min.js"></script>
+    <script src="<%$__RESOURCE%>js/jquery.validate.js"></script>
+    <script src="<%$__RESOURCE%>js/maruti.js"></script>
+    <script src="<%$__RESOURCE%>js/maruti.form_validation.js"></script>
+</head>
     <body>
         <div id="logo">
-            <img src="img/login-logo.png" alt="" />
+            <img src="<%$__RESOURCE%>img/login-logo.png" alt="" />
         </div>
         <div id="loginbox">            
-            <form id="loginform" class="form-vertical" action="index.html">
+            <form class="form-vertical" action="index.html" name="basic_validate" id="basic_validate" novalidate="novalidate">
 				 <div class="control-group normal_text"><h3>Maruti Admin Login</h3></div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on"><i class="icon-user"></i></span><input type="text" placeholder="Username" />
+                            <span class="add-on"><i class="icon-user"></i></span><input type="text" placeholder="Username"  id="required"  name="required"/>
                         </div>
                     </div>
                 </div>
@@ -50,8 +60,7 @@
             </form>
         </div>
         
-        <script src="js/jquery.min.js"></script>  
-        <script src="js/maruti.login.js"></script> 
+
     </body>
 
 </html>

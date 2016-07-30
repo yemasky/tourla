@@ -32,7 +32,7 @@ class IndexAction extends \BaseAction {
                 $this->admin_register($objRequest, $objResponse);
                 break;
             default:
-                $this->doBase($objRequest, $objResponse);
+                $this->doDefault($objRequest, $objResponse);
                 break;
         }
     }
@@ -40,14 +40,14 @@ class IndexAction extends \BaseAction {
     /**
      * 首页显示
      */
-    protected function doBase($objRequest, $objResponse) {
+    protected function doDefault($objRequest, $objResponse) {
         //赋值
         //设置类别
         $objResponse -> nav = 'index';
         $objResponse -> setTplValue('merchantMenu', $objResponse->arrMerchantMenu);
         //设置Meta(共通)
         $objResponse -> setTplValue("__Meta", \BaseCommon::getMeta('index', '管理后台', '管理后台', '管理后台'));
-        $objResponse -> setTplName("merchant/base");
+        $objResponse -> setTplName("merchant/index");
     }
 
     protected function admin_content($objRequest, $objResponse) {
