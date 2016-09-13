@@ -57,7 +57,6 @@ class IndexAction extends \BaseAction {
     }
 
     protected function admin_login($objRequest, $objResponse) {
-        print_r($objRequest);//exit();
         $arrayLoginInfo['mu_login_email'] = $objRequest->username;
         $arrayLoginInfo['mu_login_password'] = $objRequest->password;
         $remember_me = $objRequest->remember_me;
@@ -68,10 +67,10 @@ class IndexAction extends \BaseAction {
         }
         $error_login = 0;
         if(!empty($arrayLoginInfo['mu_login_email']) && !empty($arrayLoginInfo['mu_login_password'])) {
-            $arrayUserInfo = LoginService::instance('\merchant\LoginService')->loginUser($arrayLoginInfo);
+            $arrayUserInfo = LoginService::loginUser($arrayLoginInfo);
             if(!empty($arrayUserInfo)) {
                 $arrayUserInfo['mu_login_email'] = $arrayLoginInfo['mu_login_email'];
-                CommonService::setLoginUserCookie($arrayUserInfo, $remember_me);
+                LoginService::setLoginUserCookie($arrayUserInfo, $remember_me);
                 redirect(__WEB);
             } else {
                 $error_login = 1;

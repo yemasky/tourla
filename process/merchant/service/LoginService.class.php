@@ -9,7 +9,7 @@ namespace merchant;
 class LoginService extends \BaseService {
     private static $loginKey = 'loginuser';
 
-    public function loginUser($arrayLoginInfo){
+    public static function loginUser($arrayLoginInfo){
         //$objMerchantUserDao = new MerchantUserDao();
         //return $objMerchantUserDao->getLoginUser($arrayLoginInfo);
         return MerchantUserDao::instance('\merchant\MerchantUserDao')->getLoginUser($arrayLoginInfo);
@@ -73,11 +73,6 @@ class LoginService extends \BaseService {
         unset($objCookie->$loginKey);
         $loginKey = self::$loginKey . date("z");
         unset($objCookie->$loginKey);
-    }
-
-    public static function getMerchantUserAuthorize($mu_id) {
-        $objModulesAuthorizeDao = new ModulesAuthorizeDao();
-        return $objModulesAuthorizeDao->DBCache(1800)->getMerchantUserAuthorize($mu_id);
     }
 
     /**
