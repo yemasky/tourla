@@ -17,6 +17,7 @@ class pdo_driver {
 	 */
 	public function __construct($dbConfig){
 		$dsn = $dbConfig['pdo_driver'].':host=' . $dbConfig['host'] . ';dbname='.$dbConfig['database'];
+        if(isset($dbConfig['port'])) $dsn = $dsn . ';port='. $dbConfig['port'];
 		$this->conn = new PDO($dsn, $dbConfig['login'], $dbConfig['password']);
 		$this->execute('SET NAMES UTF8;');
 	}
@@ -53,6 +54,7 @@ class pdo_driver {
 	 * 返回当前插入记录的主键ID
 	 */
 	public function getInsertid(){
+        return $this->conn->lastInsertId();
 	}
 
 	/**

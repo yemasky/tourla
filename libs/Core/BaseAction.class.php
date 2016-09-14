@@ -759,7 +759,7 @@ class DBQuery{
 	}
 
 	public function explodeDsn($dsn){
-		// mysql://smartercn:any@192.168.100.239/smartercn_FrontEnd
+		// mysql://smartercn:any@192.168.100.239:3306/smartercn_FrontEnd
 		$arrValue = explode('://', $dsn);
         $arrDriver = explode('_', $arrValue[0]);
         if(count($arrDriver) == 2) {
@@ -771,7 +771,9 @@ class DBQuery{
 		$arrValue = explode('/', $arrValue[1]);
 		$arrDsn['database'] = $arrValue[1];
 		$arrValue = explode('@', $arrValue[0]);
-		$arrDsn['host'] = $arrValue[1];
+        $arrHost = explode(':', $arrValue[1]);
+		$arrDsn['host'] = $arrHost[0];
+        if(isset($arrHost[1])) $arrDsn['port'] = $arrHost[1];
 		$arrValue = explode(':', $arrValue[0]);
 		$arrDsn['login'] = $arrValue[0];
 		$arrDsn['password'] = $arrValue[1];
