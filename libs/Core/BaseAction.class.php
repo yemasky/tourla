@@ -761,7 +761,13 @@ class DBQuery{
 	public function explodeDsn($dsn){
 		// mysql://smartercn:any@192.168.100.239/smartercn_FrontEnd
 		$arrValue = explode('://', $dsn);
-		$arrDsn['driver'] = $arrValue[0] . '_';
+        $arrDriver = explode('_', $arrValue[0]);
+        if(count($arrDriver) == 2) {
+            $arrDsn['driver'] = 'pdo_driver';
+            $arrDsn['pdo_driver'] = $arrDriver[1];
+        } else {
+            $arrDsn['driver'] = $arrValue[0] . '_driver';
+        }
 		$arrValue = explode('/', $arrValue[1]);
 		$arrDsn['database'] = $arrValue[1];
 		$arrValue = explode('@', $arrValue[0]);

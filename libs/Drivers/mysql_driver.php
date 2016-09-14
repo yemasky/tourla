@@ -5,7 +5,7 @@
  */
 class SQLException extends Exception{
 }
-class mysqli_ {
+class mysql_driver{
 	/**
 	 * 数据库链接句柄
 	 */
@@ -18,15 +18,19 @@ class mysqli_ {
 	 *        	dbConfig 数据库配置
 	 */
 	public function __construct($dbConfig){
-		$this->conn = mysqli_connect($dbConfig['host'], $dbConfig['login'], $dbConfig['password'], $dbConfig['database']); //mysql_connect($dbConfig['host'], $dbConfig['login'], $dbConfig['password']);
-		if (mysqli_connect_errno()) {
-			throw new SQLException("数据库链接错误: " . mysqli_connect_errno());
+		$this->conn = mysql_connect($dbConfig['host'], $dbConfig['login'], $dbConfig['password']);
+		if($this->conn == false) {
+			throw new SQLException("数据库链接错误: " . mysql_error());
 		}
+		if(mysql_select_db($dbConfig['database'], $this->conn)) {
+		} else {
+			throw new SQLException("无法找到数据库，请确认数据库名称正确！");
+		} // $this -> query();
 		$this->execute('SET NAMES UTF8;');
 	}
 
 	public function selectDB($databases){
-		if(mysqli_select_db($this->conn, $databases)) {
+		if(mysql_select_db($databases, $this->conn)) {
 		} else {
 			throw new SQLException("无法找到数据库，请确认数据库名称正确！");
 		}
@@ -41,32 +45,31 @@ class mysqli_ {
 	public function getQueryArrayResult($sql){
 		$result = $this->execute($sql);
 		$rows = array ();
-		while($rows[] = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+		while($rows[] = mysql_fetch_array($result, MYSQL_ASSOC)) {
 		}
-		mysqli_free_result($result);
+		mysql_free_result($result);
 		array_pop($rows);
 		return $rows;
 	}
 
 	public function getQueryRowResult($sql){
 		$result = $this->execute($sql);
-		$row = mysqli_fetch_assoc($result);
-		mysqli_free_result($result);
+		$row = mysql_fetch_assoc($result);
+		mysql_free_result($result);
 		return $row;
 	}
 
 	public function getQueryOneResult($sql){
 		$result = $this->execute($sql);
-		$row = mysqli_fetch_row($result);
-		mysqli_free_result($result);
+		$row = mysql_fetch_row($result);
+		mysql_free_result($result);
 		return $row[0];
 	}
-
 	/**
 	 * 返回当前插入记录的主键ID
 	 */
 	public function getInsertid(){
-		return mysqli_insert_id($this->conn);
+		return mysql_insert_id($this->conn);
 	}
 
 	/**
@@ -83,11 +86,11 @@ class mysqli_ {
 	 *        	sql 需要执行的SQL语句
 	 */
 	public function execute($sql){
-		if($result = mysqli_query($this->conn, $sql)) {
+		if($result = mysql_query($sql, $this->conn)) {
 			return $result;
 		} else {
 			// print_r( mysql_error());
-			throw new SQLException("{$sql}<br />执行错误:" . mysqli_error($this->conn));
+			throw new SQLException("{$sql}<br />执行错误:" . mysql_error());
 		}
 	}
 
@@ -95,7 +98,7 @@ class mysqli_ {
 	 * 返回影响行数
 	 */
 	public function affected_rows(){
-		return mysqli_affected_rows($this->conn);
+		return mysql_affected_rows($this->conn);
 	}
 
 	/**
@@ -112,7 +115,7 @@ class mysqli_ {
 	 * 析构函数 __destruct
 	 */
 	public function close(){
-		mysqli_close($this->conn);
+		mysql_close($this->conn);
 	}
 }
 

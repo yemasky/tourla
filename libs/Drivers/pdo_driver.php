@@ -3,7 +3,7 @@
 /**
  *  PDO MySQL数据驱动类
  */
-class pdo_ {
+class pdo_driver {
 	/**
 	 * 数据库链接句柄
 	 */
@@ -16,7 +16,7 @@ class pdo_ {
 	 *        	dbConfig 数据库配置
 	 */
 	public function __construct($dbConfig){
-		$dsn = 'mysql:host=' . $dbConfig['host'] . ';dbname='.$dbConfig['database'];
+		$dsn = $dbConfig['pdo_driver'].':host=' . $dbConfig['host'] . ';dbname='.$dbConfig['database'];
 		$this->conn = new PDO($dsn, $dbConfig['login'], $dbConfig['password']);
 		$this->execute('SET NAMES UTF8;');
 	}
