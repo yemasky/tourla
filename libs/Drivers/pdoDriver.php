@@ -3,7 +3,7 @@
 /**
  *  PDO MySQL数据驱动类
  */
-class pdo_driver {
+class pdoDriver {
 	/**
 	 * 数据库链接句柄
 	 */

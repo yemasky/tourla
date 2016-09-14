@@ -763,10 +763,10 @@ class DBQuery{
 		$arrValue = explode('://', $dsn);
         $arrDriver = explode('_', $arrValue[0]);
         if(count($arrDriver) == 2) {
-            $arrDsn['driver'] = 'pdo_driver';
+            $arrDsn['driver'] = 'pdoDriver';
             $arrDsn['pdo_driver'] = $arrDriver[1];
         } else {
-            $arrDsn['driver'] = $arrValue[0] . '_driver';
+            $arrDsn['driver'] = $arrValue[0] . 'Driver';
         }
 		$arrValue = explode('/', $arrValue[1]);
 		$arrDsn['database'] = $arrValue[1];
